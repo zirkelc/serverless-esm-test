@@ -1,12 +1,16 @@
-import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/api-gateway';
-import { formatJSONResponse } from '@libs/api-gateway';
-import { middyfy } from '@libs/lambda';
+import type { Handler } from "aws-lambda";
+import { formatJSONResponse } from '../../libs/api-gateway';
+import { middyfy } from '../../libs/lambda';
 
-import schema from './schema';
+const sleep = (ms: number) => new Promise(resolve => {
+  setTimeout(resolve, ms)
+});
 
-const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+await sleep(500);
+
+const hello: Handler = async (event) => {
   return formatJSONResponse({
-    message: `Hello ${event.body.name}, welcome to the exciting Serverless world!`,
+    message: `Hello from Serverless on Node 16 with ESM and Top-Level-Await!`,
     event,
   });
 };

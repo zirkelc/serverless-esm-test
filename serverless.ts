@@ -1,14 +1,15 @@
 import type { AWS } from '@serverless/typescript';
 
-import hello from './src/functions/hello/index';
+// import hello from './src/functions/hello/index';
+// import hello = require('./src/functions/hello/index.ts');
 
 const serverlessConfiguration: AWS = {
-  service: 'serverless-test',
+  service: 'serverless-esm-test',
   frameworkVersion: '3',
   plugins: ['serverless-esbuild'],
   provider: {
     name: 'aws',
-    runtime: 'nodejs14.x',
+    runtime: 'nodejs16.x',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -19,15 +20,29 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { hello },
+  functions: { hello: {
+    handler: `./src/functions/hello/handler.main`,
+    events: [
+      {
+        http: {
+          method: 'get',
+          path: 'hello',
+        },
+      },
+    ],
+   },
+  },
   package: { individually: true },
   custom: {
     esbuild: {
+      format: 'esm',
       bundle: true,
       minify: false,
       sourcemap: true,
+      keepOutputDirectory: true,
+      external: ['aws-sdk'],
       exclude: ['aws-sdk'],
-      target: 'node14',
+      target: 'node16',
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10,
