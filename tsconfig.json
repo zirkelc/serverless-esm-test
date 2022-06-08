@@ -17,12 +17,6 @@
     ".vscode/**/*"
   ],
   "ts-node": {
-    // "compilerOptions": {
-    //   "module": "CommonJS"
-    // },
     "esm": true,
-    // "require": [
-    //   "tsconfig-paths/register"
-    // ]
   }
 }
