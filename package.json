@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sls:package": "nodemon --ext ts --exec \"npx sls package\""
+    "sls:package": "sls package"
   },
   "engines": {
     "node": ">=14.15.0"

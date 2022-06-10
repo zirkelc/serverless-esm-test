@@ -36,6 +36,7 @@ const serverlessConfiguration: AWS = {
   custom: {
     esbuild: {
       format: 'esm',
+      outExtension: {'.js':'.mjs'},
       bundle: true,
       minify: false,
       sourcemap: true,

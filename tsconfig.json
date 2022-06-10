@@ -7,7 +7,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "serverless.ts"
+    "serverless.ts",
   ],
   "exclude": [
     "node_modules/**/*",
